@@ -1,0 +1,52 @@
+<?php
+
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// phpcs:disable Magento2.Templates.ThisInTemplate
+
+/** @var $block AHT\SaleAgent\Block\Account\Dashboard\OrderSaleAgent */
+?>
+<?php $_saleAgents = $block->getAgent();
+?>
+<?php if ($_saleAgents && count($_saleAgents)) : ?>
+    <div class="table-wrapper agent-recent">
+        <table class="data table table-agent-items recent" id="my-agent-table">
+            <caption class="table-caption"><?= $block->escapeHtml(__('Sale Agent')) ?></caption>
+            <thead>
+                <tr>
+                    <th scope="col" class="col product-name"><?= $block->escapeHtml(__('Product Name')) ?></th>
+                    <th scope="col" class="col product-sku"><?= $block->escapeHtml(__('Product SKU')) ?></th>
+                    <th scope="col" class="col product-price"><?= $block->escapeHtml(__('Product Price')) ?></th>
+                    <th scope="col" class="col product-qty"><?= $block->escapeHtml(__('Product Qty')) ?></th>
+                    <th scope="col" class="col commission-value"><?= $block->escapeHtml(__('Total Assigned')) ?></th>
+                    <th scope="col" class="col actions"><?= $block->escapeHtml(__('View Product')) ?></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($_saleAgents as $_saleAgent) : ?>
+                    <?php $_product = $block->getProduct($_saleAgent->getOrderItemSku()); ?>
+                    <tr>
+                        <td data-th="<?= $block->escapeHtmlAttr(__('Product Name')) ?>" class="col product-name"><?= $block->escapeHtml($_saleAgent->getName()) ?></td>
+                        <td data-th="<?= $block->escapeHtmlAttr(__('Product SKU')) ?>" class="col product-sku"><?= $_saleAgent->getSku() ?></td>
+                        <td data-th="<?= $block->escapeHtmlAttr(__('Product Price')) ?>" class="col product-price"><?= $block->getFormatedPrice($_product->getPrice()) ?></td>
+                        <td data-th="<?= $block->escapeHtmlAttr(__('Product Qty')) ?>" class="col product-qty"><?= $block->convertQty($_saleAgent->getQty()) ?></td>
+                        <td data-th="<?= $block->escapeHtmlAttr(__('Total Assigned')) ?>" class="col Total Assigned"><?= $block->getFormatedPrice($_saleAgent->getTotal()) ?></td>
+                        <td data-th="<?= $block->escapeHtmlAttr(__('Actions')) ?>" class="col actions">
+                            <a href="<?= $_product->getProductUrl() ?>" class="action view">
+                                <span><?= $block->escapeHtml(__('View Product')) ?></span>
+                            </a>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+    <?php if ($block->getPagerHtml()) : ?>
+        <div class="agent-products-toolbar toolbar bottom"><?= $block->getPagerHtml() ?></div>
+    <?php endif; ?>
+<?php else : ?>
+    <div class="message info empty"><span><?= $block->escapeHtml(__('You have placed no sale agent.')) ?></span></div>
+<?php endif; ?>

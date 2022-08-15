@@ -1,0 +1,65 @@
+<?php
+
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// phpcs:disable Magento2.Templates.ThisInTemplate
+
+/** @var $block AHT\SaleAgent\Block\Account\Dashboard\AccountAssigned */
+?>
+<div class="block block-dashboard-product-agent">
+    <?php
+    $_productAgents = $block->getProAgent();
+    $count = count($_productAgents);
+    ?>
+    <div class="block-title agent">
+        <strong><?= $block->escapeHtml(__('Product Sale Agent')) ?></strong>
+        <?php if ($count > 0) : ?>
+            <a class="action view" href="<?= $block->escapeUrl($block->getUrl('saleagent/product/index/')) ?>">
+                <span><?= $block->escapeHtml(__('View All')) ?></span>
+            </a>
+        <?php endif; ?>
+    </div>
+    <div class="block-content">
+        <?= $block->getChildHtml() ?>
+        <?php if ($count > 0) : ?>
+            <div class="table-wrapper agent-recent">
+                <table class="data table table-agent-items recent" id="my-agent-table">
+                    <caption class="table-caption"><?= $block->escapeHtml(__('Product Agent')) ?></caption>
+                    <thead>
+                        <tr>
+                            <th scope="col" class="col product-name"><?= $block->escapeHtml(__('Product Name')) ?></th>
+                            <th scope="col" class="col product-sku"><?= $block->escapeHtml(__('Product SKU')) ?></th>
+                            <th scope="col" class="col commission-type"><?= $block->escapeHtml(__('Commission Type')) ?></th>
+                            <th scope="col" class="col commission-value"><?= $block->escapeHtml(__('Commission Value')) ?></th>
+                            <th scope="col" class="col actions"><?= $block->escapeHtml(__('View Product')) ?></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($_productAgents as $_productAgent) : ?>
+                            <tr>
+                                <td data-th="<?= $block->escapeHtmlAttr(__('Product Name')) ?>" class="col product-name"><?= $block->escapeHtml($_productAgent->getName()) ?></td>
+                                <td data-th="<?= $block->escapeHtmlAttr(__('Product SKU')) ?>" class="col product-sku"><?= $_productAgent->getSku() ?></td>
+                                <td data-th="<?= $block->escapeHtmlAttr(__('Commission Type')) ?>" class="col commission-type"><?= $block->escapeHtml($_productAgent->getCommissionType()) ?></td>
+                                <?php if ($block->checkTypeCommission($_productAgent->getCommissionType()) == true) : ?>
+                                    <td data-th="<?= $block->escapeHtmlAttr(__('Commission Value')) ?>" class="col commission-value"><?= $block->getFormatedPercent($_productAgent->getCommissionValue()) ?></td>
+                                <?php else : ?>
+                                    <td data-th="<?= $block->escapeHtmlAttr(__('Commission Value')) ?>" class="col commission-value"><?= $block->getFormatedPrice($_productAgent->getCommissionValue()) ?></td>
+                                <?php endif; ?>
+                                <td data-th="<?= $block->escapeHtmlAttr(__('Actions')) ?>" class="col actions">
+                                    <a href="<?= $_productAgent->getProductUrl() ?>" class="action view">
+                                        <span><?= $block->escapeHtml(__('View Product')) ?></span>
+                                    </a>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+        <?php else : ?>
+            <div class="message info empty"><span><?= $block->escapeHtml(__('You have placed no product agent.')) ?></span></div>
+        <?php endif; ?>
+    </div>
+</div>

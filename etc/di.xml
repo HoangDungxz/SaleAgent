@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="AHT\SaleAgent\Api\SaleAgentRepositoryInterface" type="AHT\SaleAgent\Model\SaleAgentRepository"/>
+    <preference for="AHT\SaleAgent\Api\Data\SaleAgentInterface" type="AHT\SaleAgent\Model\SaleAgent"/>
+    <preference for="AHT\SaleAgent\Api\Data\SaleAgentSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+    <preference for="Magento\Theme\Block\Html\Header" type="AHT\SaleAgent\Block\Html\Header"/>
+    <type name="AHT\SaleAgent\Model\ResourceModel\SaleAgent\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">aht_saleagent_saleagent</argument>
+            <argument name="resourceModel" xsi:type="string">AHT\SaleAgent\Model\ResourceModel\SaleAgent\Collection</argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="saleagent_product_listing_data_source" xsi:type="string">AHT\SaleAgent\Model\ResourceModel\SaleAgent\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

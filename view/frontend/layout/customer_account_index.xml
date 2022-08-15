@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <block class="AHT\SaleAgent\Block\Account\Dashboard\SaleAgent" name="customer_account_dashboard_product_assigned" template="AHT_SaleAgent::account/dashboard/account-assigned.phtml" cacheable="false" />
+            <block class="AHT\SaleAgent\Block\Account\Dashboard\SaleAgentCommission" name="customer_account_dashboard_product_commission" template="AHT_SaleAgent::account/dashboard/account-commission.phtml" />
+        </referenceContainer>
+    </body>
+</page>

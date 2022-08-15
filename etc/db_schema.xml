@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="aht_saleagent_saleagent" resource="default" engine="innodb" comment="aht_saleagent_saleagent Table">
+        <column xsi:type="int" name="saleagent_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Entity Id"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="saleagent_id"/>
+        </constraint>
+        <column name="entity_id" nullable="true" xsi:type="varchar" length="1024" comment="entity_id"/>
+        <column name="order_id" nullable="true" xsi:type="varchar" length="1024" comment="order_id"/>
+        <column name="order_item_id" nullable="true" xsi:type="varchar" length="1024" comment="order_item_id"/>
+        <column name="order_item_sku" nullable="true" xsi:type="varchar" length="1024" comment="order_item_sku"/>
+        <index referenceId="ORDER_ITEM_SKU" indexType="fulltext">
+            <column name="order_item_sku"/>
+        </index>
+        <column name="order_item_price" nullable="true" xsi:type="decimal" scale="6" precision="20" comment="order_item_price"/>
+        <column name="commision_type" nullable="true" xsi:type="varchar" length="1024" comment="commision_type"/>
+        <index referenceId="COMMISSION_TYPE" indexType="fulltext">
+            <column name="commision_type"/>
+        </index>
+        <column name="commission_value" nullable="true" xsi:type="decimal" scale="6" precision="20" comment="commission_value"/>
+    </table>
+</schema>

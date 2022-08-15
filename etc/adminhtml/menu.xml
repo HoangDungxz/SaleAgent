@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="AHT_SaleAgent::sale_agent_product" title="Sale Agent Product" module="AHT_SaleAgent" sortOrder="50" resource="AHT_SaleAgent::sale_agent_product" parent="Magento_Reports::report_products" action="saleagent/product/index"/>
+    </menu>
+</config>
